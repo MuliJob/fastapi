@@ -8,9 +8,22 @@ app = FastAPI()
 @app.get('/')
 def index():
     """Index route function"""
-    return {'data': {'name': 'Munyoki'}}
+    return {'data': 'blog list'}
 
-@app.get('/about')
-def about():
-    """About page"""
-    return {'data': 'About-page'}
+
+@app.get('/blog/unpublished')
+def unpublished():
+    """Unpublished blogs"""
+    return {'data': 'all unpublished blogs'}
+
+
+@app.get('/blog/{id}')
+def show(id: int):
+    """Blog detail page"""
+    return {'data': id}
+
+
+@app.get('/blog/{id}/comments')
+def comments(id):
+    """Comment function"""
+    return {'data': {'3', '5'}}
