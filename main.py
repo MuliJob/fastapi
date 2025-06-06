@@ -1,6 +1,7 @@
 """Main file"""
 from typing import Optional
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -31,3 +32,16 @@ def show(id: int):
 def comments(id):
     """Comment function"""
     return {'data': {'3', '5'}}
+
+
+class Blog(BaseModel):
+    """Blog Model"""
+    title: str
+    body: str
+    published: Optional[bool]
+
+
+@app.post('/blog')
+def create_post(request: Blog):
+    """Post creation"""
+    return {'data': f"Blog created with title {request.title}"}
