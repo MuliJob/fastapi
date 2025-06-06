@@ -1,14 +1,18 @@
 """Main file"""
+from typing import Optional
 from fastapi import FastAPI
 
 
 app = FastAPI()
 
 
-@app.get('/')
-def index():
+@app.get('/blog')
+def index(limit = 10, published: bool = True, sort: Optional[str] = None):
     """Index route function"""
-    return {'data': 'blog list'}
+    if published:
+        return {'data': f'{limit} published blogs from the db'}
+    else:
+        return {'data': f'{limit} blogs from the db'}
 
 
 @app.get('/blog/unpublished')
